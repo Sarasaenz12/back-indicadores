@@ -17,7 +17,7 @@ python-dotenv==1.1.0
 
 # Procesamiento de archivos Excel
 openpyxl==3.1.2
-pandas==2.1.4
+pandas==2.2.3  
 
 # Reportes PDF y gráficos
 reportlab==4.0.7
@@ -25,7 +25,7 @@ matplotlib==3.8.2
 seaborn==0.13.2
 
 # Validación de archivos
-python-magic-bin==0.4.27
+python-magic==0.4.27 
 
 # Utilidades
 pillow==10.1.0
