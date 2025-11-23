@@ -33,19 +33,22 @@ class ExcelProcessor:
             if ext not in settings.ALLOWED_EXTENSIONS:
                 return False, f"Extensión no permitida. Extensiones válidas: {', '.join(settings.ALLOWED_EXTENSIONS)}"
 
-            # Verificar tipo MIME
-            mime_type = magic.from_buffer(archivo.read(), mime=True)
-            archivo.seek(0)  # Resetear el puntero del archivo
+            # Intentar leer el archivo con pandas para validar que sea Excel válido
+            try:
+                archivo.seek(0)  # Resetear el puntero del archivo
 
-            valid_mime_types = [
-                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                'application/vnd.ms-excel'
-            ]
+                # Intentar leer con pandas (esto valida si es un Excel válido)
+                if ext == '.xlsx':
+                    pd.read_excel(archivo, engine='openpyxl', nrows=1)
+                else:  # .xls
+                    pd.read_excel(archivo, engine='xlrd', nrows=1)
 
-            if mime_type not in valid_mime_types:
-                return False, "El archivo no es un Excel válido"
+                archivo.seek(0)  # Resetear después de la validación
+                return True, "Archivo válido"
 
-            return True, "Archivo válido"
+            except Exception as excel_error:
+                archivo.seek(0)
+                return False, f"El archivo no es un Excel válido o está corrupto: {str(excel_error)}"
 
         except Exception as e:
             return False, f"Error al validar archivo: {str(e)}"
