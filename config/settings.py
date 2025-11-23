@@ -151,7 +151,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:63342",  # WebStorm
     "http://127.0.0.1:5500",   # Live Server
     "http://localhost:3000",# Si luego usas React u otro
-    "sistema-indicadores-alcaldia.netlify.app",
+    "https://sistema-indicadores-alcaldia.netlify.app",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
