@@ -86,6 +86,9 @@ else:
             'PASSWORD': config('DATABASE_PASSWORD', default='bocato0731'),
             'HOST': config('DATABASE_HOST', default='localhost'),
             'PORT': config('DATABASE_PORT', default='5432'),
+            'OPTIONS': {
+                'sslmode': 'disable',  # ✅ Deshabilitar SSL para desarrollo local
+            }
         }
     }
 
